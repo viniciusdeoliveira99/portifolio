@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vin&iacutecius Mattos</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/VINICIUS-MATTOS.ico" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap"
@@ -164,14 +165,14 @@
           <h3>Contato</h3>
         </div>
         <div class="contato-form">
-          <form action="" method="POST" onsubmit="return validateEmailInput()">
+          <form action="" id="form" method="POST" onsubmit="return validaFormulario()">
             <fieldset class="form-grid">
               <div class="form-group">
                 <label for="first-name">Nome</label>
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="name"
+                  id="name"
                   placeholder="Nome"
                   required
                 />
@@ -182,10 +183,10 @@
                 <input
                   type="email"
                   name="email"
-                  id="emailInput"
+                  id="email"
                   placeholder="seu@email.com"
                   required
-                  oninput="validateEmailInput()"
+                  oninput="validaFormulario()"
                 />
                  <span id="emailFeedback" style="color: red;"></span>
               </div>
@@ -201,9 +202,8 @@
                   required
                 ></textarea>
               </div>
-  
               <div class="form-group full-width">
-                <button type="submit" value="Submit">Enviar</button>
+                <button type="submit">Enviar</button>
               </div>
             </fieldset>
           </form>
@@ -223,6 +223,7 @@
     </footer>
     <a class="back-to-top" href="#">➤</a>
     
+    <!--script-->
     <script src="assets/js/funcoes.js"></script>
   </body>
 </html>
