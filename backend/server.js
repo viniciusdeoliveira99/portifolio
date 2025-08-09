@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-app.post("https://viniciusmattos.netlify.app/enviarEmail", async (req, res) => {
+app.post("/enviarEmail", async (req, res) => {
   const { name, email, message } = req.body;
 
   const transporter = nodemailer.createTransport({
@@ -43,6 +43,10 @@ app.post("https://viniciusmattos.netlify.app/enviarEmail", async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Erro ao enviar o e-mail." });
   }
+});
+
+app.get("/", (req, res) => {
+  res.send("API rodando.");
 });
 
 app.listen(PORT, () => {

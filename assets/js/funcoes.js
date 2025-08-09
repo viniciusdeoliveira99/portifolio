@@ -27,7 +27,7 @@ function enviaEmail() {
 
     try {
       const res = await fetch(
-        "https://viniciusmattos.netlify.app/enviarEmail",
+        "https://portifolio-x43c.onrender.com/enviarEmail",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
