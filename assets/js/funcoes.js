@@ -15,36 +15,32 @@ function validaFormulario() {
 }
 
 function enviaEmail() {
-  document.getElementById("form").addEventListener("submit", async (e) => {
+  const form = document.getElementById("form");
+  // const responseText = document.getElementById("response");
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     e.stopImmediatePropagation();
 
-    const formData = {
-      name: e.target.name.value,
-      email: e.target.email.value,
-      message: e.target.message.value,
-    };
-
-    // console.log(formData);
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch("http://localhost:3000/enviarEmail", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://viniciusmattos.netlify.app/enviarEmail",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
 
-      if (!response.ok) throw new Error("Erro na requisição");
-
-      const result = await response.json();
+      const result = await res.json();
       alert(result.message);
-      e.target.reset(); // Limpar o formulário
-    } catch (error) {
-      console.error("Falha ao enviar:", error);
-      alert("Erro ao enviar mensagem. Tente novamente.");
+      // responseText.textContent = result.message;
+      e.target.reset();
+    } catch (err) {
+      alert("Erro ao enviar o e-mail.");
     }
   });
 }

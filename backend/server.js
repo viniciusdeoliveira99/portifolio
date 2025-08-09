@@ -1,66 +1,50 @@
 require("dotenv").config();
 const express = require("express");
 const nodemailer = require("nodemailer");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static("public"));
 
-app.options("*", cors());
-app.use(express.json());
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-  next();
-});
-
-// rota de envio de e-mail teste
 app.post("/enviarEmail", async (req, res) => {
-  console.log("Dados recebidos:", req.body);
+  const { name, email, message } = req.body;
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
+    service: "iCloud",
     auth: {
-      user: process.env.ETHEREAL_USER,
-      pass: process.env.ETHEREAL_PASS,
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
   const mailOptions = {
-    from: `"${req.body.name}" <${req.body.email}>`,
-    to: process.env.EMAIL_DESTINO,
-    subject: `Nova mensagem de ${req.body.name || "Contato"}`,
-    text: req.body.message,
-    html: `<p>${req.body.message}</p>`,
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
+    subject: `Formulário de contato`,
+    text: `
+      Nome: ${name}
+      E-mail: ${email}
+      Mensagem: ${message}
+    `,
+    headers: {
+      "Reply-To": email,
+    },
   };
 
   try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log("E-mail enviado:", info.messageId, info.response);
-    res.json({ message: "Mensagem enviada com sucesso!" });
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "E-mail enviado com sucesso!" });
   } catch (error) {
-    console.error("Erro ao enviar:", error);
-    res.status(500).json({ message: "Erro no servidor" });
+    console.error(error);
+    res.status(500).json({ message: "Erro ao enviar o e-mail." });
   }
 });
 
-// Inicia o servidor
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
