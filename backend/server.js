@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-app.post("/enviarEmail", async (req, res) => {
+app.post("https://viniciusmattos.netlify.app/enviarEmail", async (req, res) => {
   const { name, email, message } = req.body;
 
   const transporter = nodemailer.createTransport({
