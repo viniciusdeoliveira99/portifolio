@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
     />
+    
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
     <link rel="stylesheet" href="assets/css/variables.css" />
     <link rel="stylesheet" href="assets/css/elements.css" />
@@ -159,7 +160,7 @@
       </div>
     </section> -->
 
-    <section id="contato" class="sobre contato-bg section">
+    <section id="contato" class="sobre main-bg section">
       <div class="main-content sobre-content">
         <div class="sobre-text-content">
           <h3>Contato</h3>
@@ -222,9 +223,13 @@
         document.getElementById("copy").innerHTML = copy;
       </script>
     </footer>
-    <a class="back-to-top" href="#">➤</a>
+    <a class="back-to-top" id="backBtn" href="#">➤</a>
     
     <!--script-->
+    <script>
+      window.onscroll = function() {scrollFunction()};
+    </script>
+    
     <script src="assets/js/funcoes.js"></script>
   </body>
 </html>

@@ -44,3 +44,13 @@ function enviaEmail() {
     }
   });
 }
+
+function scrollFunction() {
+  let botaoBackToTop = document.getElementById("backBtn");
+
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    botaoBackToTop.style.display = "flex";
+  } else {
+    botaoBackToTop.style.display = "none";
+  }
+}
