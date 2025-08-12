@@ -1,10 +1,10 @@
-# Portifolio
+# Portfolio
 =====================
 
-## Portifolio - Página Web Pessoal
+## Portfolio - Página Web Pessoal
 ------------------------
 
-Portifolio - Landing Page para apresentar minha página Web com os projetos desenvolvidos e também como contato profissional. Foi construído com HTML, CSS, JavaScript, Backend NodeJs.
+Portfolio - Landing Page para apresentar minha página Web com os projetos desenvolvidos e também como contato profissional. Foi construído com HTML, CSS, JavaScript, Backend NodeJs.
 
 **Funcionalidades:**
 As principais funcionalidades do projeto incluem:
